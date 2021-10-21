@@ -23,11 +23,11 @@ from mrjoker import (
     updater,
 )
 
+# needed to dynamically load modules
+# NOTE: Module order is not guaranteed, specify that in the config file!
 from mrjoker.modules import ALL_MODULES
 from mrjoker.modules.helper_funcs.chat_status import is_user_admin
 from mrjoker.modules.helper_funcs.misc import paginate_modules
-from mrjoker.modules.connection import connected
-
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import (
     BadRequest,
@@ -72,46 +72,59 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-MRJOKER_IMG = "https://telegra.ph/file/e3ffbd55b5ccc600f71fa.jpg"
-
-MRJOKER_AUD = "https://audio.jukehost.co.uk/kKJkdHgoMPeqdel4sDrEHr7m4U6o4Xya"
-
 
 PM_START_TEXT = """
-*Hello there*, *I*'*m* [𝐖𝐨𝐥𝐟 𝐗](https://telegra.ph/file/e3ffbd55b5ccc600f71fa.jpg)
-*I am an 𝐴𝑛𝑖𝑚𝑒 Themed Group Managing Bot and I will help in managing your group*
-🍃🔻 **Make sure you read** `INFO` **Section Below** 🔺🍃 
+Hello I'm [𝐰𝐨𝐥𝐟 - 𝐗](https://telegra.ph/file/345cd2da67a5c57189810.jpg) ,
+
+➪ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴀɴᴅ ᴍᴀᴋᴇ ᴀᴅᴍɪɴ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴡɪᴛʜ ᴇxᴘʟᴏsɪᴠᴇ.
+
+➪ ᴄᴏɴᴛᴀᴄᴛ ᴍʏ [Hᴀᴄᴋᴇʀ] ғᴏʀ ᴀɴʏ ǫᴜᴇʀʏ ᴀɴᴅ [Hᴀᴄᴋᴇʀ](https://t.me/Hollywood_movies_forever) ʜᴇʀᴇ.
+
+➪ ᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ʜᴇʟᴘ ᴛᴏ ᴇxᴘʟᴏʀᴇ ᴍᴏʀᴇ ᴀʙᴏᴜᴛ ᴍᴇ ᴀɴᴅ ᴍʏ ғᴇᴀᴛᴜʀᴇs.
+
+➪ Pᴏᴡᴇʀᴇᴅ ʙʏ [𝐰𝐨𝐥𝐟 - 𝐗](https://t.me/Hollywood_movies_forever)
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text="🐺 𝗛𝗘𝗟𝗣 🐺", callback_data="help_back"),
+            text="➕️ Aᴅᴅ ᴡᴏʟғ x ᴛᴏ ɢʀᴏᴜᴘ ➕️", url="t.me/WolfXRobot?startgroup=true"),
     ],
-   # [
-     #   InlineKeyboardButton(
-     #       text ="Language", callback_data="set_lang_"),
-    #],
     [
-        InlineKeyboardButton(text="🚀 𝗜𝗡𝗙𝗢 🚀", callback_data="mrjoker_"),
+        InlineKeyboardButton(text="❓𝐇𝐞𝐥𝐩", callback_data="help_back"),
+    ],
+    [
         InlineKeyboardButton(
-            text=" 𝗕𝗔𝗦𝗜𝗖 𝗛𝗘𝗟𝗣 👮", callback_data="mrjoker_basichelp"
-        ),
+            text="🔥𝐋𝐨𝐠𝐬🔥", url="https://t.me/PigasusLogs"),
+        InlineKeyboardButton(
+            text="🎉𝐒𝐮𝐩𝐩𝐨𝐫𝐭🎉", url="https://t.me/PigasusSupport"),
     ],
-    
+    [  
+        InlineKeyboardButton(text="👨‍💻𝐎𝐰𝐧𝐞𝐫👨‍💻", url="https://t.me/HMF_OWNER_1"
+    ),
+    ], 
     [
-        InlineKeyboardButton(text="➕ 𝐀𝐃𝐃 𝐖𝐨𝐥𝐟 𝐗 𝐓𝐎 𝐘𝐎𝐔𝐑 𝐆𝐑𝐎𝐔𝐏 ➕", url="http://t.me/@WolfXRobot?startgroup=true"),
+        InlineKeyboardButton(text="🍿𝐌𝐨𝐯𝐢𝐞𝐬🍿", url="https://t.me/joinchat/r9qx47U5xEZjY2E1"
+    ), 
+    ],
+    [   
+        InlineKeyboardButton(text="💥𝐔𝐩𝐝𝐚𝐭𝐞𝐬💥", url="https://t.me/PigasusUpdates"
+    ),
     ],
 ]
 
 
+
 HELP_STRINGS = """
-**SETTINGS**
-**𝐂𝐥𝐢𝐜𝐤 𝐨𝐧 𝐭𝐡𝐞 𝐛𝐮𝐭𝐭𝐨𝐧𝐬 𝐛𝐞𝐥𝐨𝐰 𝐭𝐨 𝐠𝐞𝐭 𝐝𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐚𝐭𝐢𝐨𝐧 𝐚𝐛𝐨𝐮𝐭 𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜 𝐦𝐨𝐝𝐮𝐥𝐞𝐬**[🐺](https://telegra.ph/file/e95e4fac70efc3745042c.jpg)"""
+*༆WOLF - X comes with many special features in it༆
+꧁CHECK ALL BUTTON BELOW TO EXPLORE EVERY COMMANDS OF WOLF-X꧂
+𖣘 All commands can either be used with / or !.
+𖣘 If you facing any issue or find any bugs in any command then you can report it @wolfxbotz /  @Hollywood_movies_forever* [.](https://telegra.ph/file/3c7a768a89335d9af9b5a.jpg)
+"""
 
+START_IMG = "https://telegra.ph/file/5df6b06b0e0e3da0685f3.mp4"
 
-
-DONATE_STRING = """ @kavinduaj"""
+DONATE_STRING = """No need.. I'm rich"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -122,8 +135,6 @@ DATA_IMPORT = []
 DATA_EXPORT = []
 CHAT_SETTINGS = {}
 USER_SETTINGS = {}
-GDPR = []
-CMD_HELP = {}
 
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("mrjoker.modules." + module_name)
@@ -144,9 +155,6 @@ for module_name in ALL_MODULES:
 
     if hasattr(imported_module, "__stats__"):
         STATS.append(imported_module)
-        
-    if hasattr(imported_module, "__gdpr__"):
-        GDPR.append(imported_module)
 
     if hasattr(imported_module, "__user_info__"):
         USER_INFO.append(imported_module)
@@ -201,7 +209,7 @@ def start(update: Update, context: CallbackContext):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="help_back")]]
+                        [[InlineKeyboardButton(text="⬅️ BACK", callback_data="help_back")]]
                     ),
                 )
 
@@ -223,19 +231,25 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
- 
             )
     else:
-        update.effective_message.reply_photo(
-            MRJOKER_IMG, caption= "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
+        update.effective_message.reply_video(
+            START_IMG, caption= "<code>WolfX is Started Sucefully✅\nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="𝗦𝗨𝗣𝗣𝗢𝗥𝗧", url="t.me/LovelySsupport")]]
+                [
+                  [
+                  InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url="https://t.me/joinchat/1QsX8u22a1kwMjhl")
+                  ],
+                  [
+                  InlineKeyboardButton(text="Oᴡɴᴇʀ", url="https://t.me/HMF_OWNER_1")
+                  ]
+                ]
             ),
         )
-        
+      
 def error_handler(update, context):
     """Log the error and send a telegram message to notify the developer."""
     # Log the error before we do anything else, so we can see it even if something breaks.
@@ -308,7 +322,7 @@ def help_button(update, context):
         if mod_match:
             module = mod_match.group(1)
             text = (
-                "❮❮❮❮🐺 𝗪𝗼𝗹𝗳 𝗫 𝗛𝗲𝗹𝗽 𝗳𝗼𝗿 *{}* 𝗺𝗼𝗱𝘂𝗹𝗲 🐺❯❯❯❯:\n".format(
+                "「 *HELP FOR* *{}* 」:\n".format(
                     HELPABLE[module].__mod_name__
                 )
                 + HELPABLE[module].__help__
@@ -318,7 +332,7 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="help_back")]]
+                    [[InlineKeyboardButton(text="「 GO BACK 」", callback_data="help_back")]]
                 ),
             )
 
@@ -357,38 +371,34 @@ def help_button(update, context):
 
     except BadRequest:
         pass
-    
-    
+
 
 @run_async
-def mrjoker_about_callback(update, context):
+def Masha_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
-    if query.data == "mrjoker_":
+    if query.data == "masha_":
         query.message.edit_text(
-            
-            text=f"*🤡 Hi again!  The name's {dispatcher.bot.first_name} 🤡 \n\nAs  You I'm a next generational group management bot developed by HITECH🇱🇰 TEAM .* "
-            f"\n\n 🔥 Join [HITECH](https://t.me/lkhitech) To Keep Yourself Updated About {dispatcher.bot.first_name} 🔥"
-            f"\n\n I have the normal GROUP MANAGING functions like flood control, a warning system etc but I mainly have the advanced and handy Antispam system and the SIBYL banning system which safegaurds and helps your group from spammers."
-            f"\n\nI Can Manage Your Groups Smoothly, With Some Special Features [:)](https://telegra.ph/file/6525d89de5b72003d80fa.png)"
-            f"\n\n Report error /bugs click the Button",
-          
+            text=""" ℹ️ I'm *LOVELY*, a powerful group management bot built to help you manage your group easily.
+                 ❍ I can restrict users.
+                 ❍ I can greet users with customizable welcome messages and even set a group's rules.
+                 ❍ I have an advanced anti-flood system.
+                 ❍ I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc.
+                 ❍ I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
+                 ❍ I check for admins' permissions before executing any command and more stuffs
+                 \n_Emcee's licensed under the GNU General Public License v3.0_
+                 Here is the [💾Repository](https://t.me/LOVELYAPPEAL).
+                 If you have any question about Lovely, let us know at @LOVELYAPPEAL.""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [
-                        InlineKeyboardButton(
-                            text="𝗬𝗢𝗨𝗧𝗨𝗕𝗘 𝗖𝗛𝗔𝗡𝗡𝗘𝗟", url="https://www.youtube.com/c/KavinduAj"
-                        ),
-                        InlineKeyboardButton(
-                            text="🇱🇰𝗛𝗜𝗧𝗘𝗖𝗛 𝗚𝗥𝗢𝗨𝗣", url="https://t.me/hitechlkgroup"
-                        ),
-                    ],
-                    [InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="mrjoker_back")],
+                 [
+                    InlineKeyboardButton(text="Back", callback_data="masha_back")
+                 ]
                 ]
             ),
         )
-    elif query.data == "mrjoker_back":
+    elif query.data == "masha_back":
         query.message.edit_text(
                 PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
@@ -397,114 +407,20 @@ def mrjoker_about_callback(update, context):
                 disable_web_page_preview=False,
         )
 
-    elif query.data == "mrjoker_basichelp":
-        query.message.edit_text(
-            text=f"*Here's basic Help regarding* *How to use Me?*"
-            f"\n\n• Firstly Add {dispatcher.bot.first_name} to your group by pressing [here](http://t.me/{dispatcher.bot.username}?startgroup=true)\n"
-            f"\n• Powerfull Telegram group Management Bot\n"
-            f"\n• Than send `/admincache@Mrjokerlk_bot` in that chat to refresh admin list in My database.\n"
-            f"\n\n*All done now use below given button's to know about use!*\n"
-            f"",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="𝗔𝗗𝗠𝗜𝗡 👮‍♂️", callback_data="mrjoker_admin"),
-                    InlineKeyboardButton(text="𝗡𝗢𝗧𝗘𝗦 📋", callback_data="mrjoker_notes"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="𝗦𝗨𝗣𝗣𝗢𝗥𝗧 👥", callback_data="LovelySsupport"),
-                    InlineKeyboardButton(text="𝗖𝗥𝗘𝗗𝗜𝗧 👨🏻‍💻", callback_data="mrjoker_credit"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="𝐆𝐎 𝐈𝐍𝐋𝐈𝐍𝐄 ↗️", switch_inline_query_current_chat=""),
-                 ],
-                 [
-                    InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="mrjoker_back"),
-                 
-                 ]
-                ]
-            ),
-        )
-    elif query.data == "mrjoker_admin":
-        query.message.edit_text(
-            text=f"*Let's make your group bit effective now*"
-            f"\nCongragulations, MⷨRͬ.JOͦᴋⷦEͤRͬ now ready to manage your group."
-            f"\n\n*Admin Tools*"
-            f"\nBasic Admin tools help you to protect and powerup your group."
-            f"\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
-            f"\n\n*Welcome*"
-            f"\nLets set a welcome message to welcome new users coming to your group."
-            f"send `/setwelcome [message]` to set a welcome message!",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="mrjoker_basichelp")]]
-            ),
-        )
 
-    elif query.data == "mrjoker_notes":
-        query.message.edit_text(
-            text=f"<b> Setting up notes</b>"
-            f"\nYou can save message/media/audio or anything as notes"
-            f"\nto get a note simply use # at the beginning of a word"
-            f"\n\nYou can also set buttons for notes and filters (refer help menu)",
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text= "⬅️ 𝗕𝗔𝗖𝗞", callback_data="mrjoker_basichelp")]]
-            ),
-        )
-        
-    elif query.data == "mrjoker_support":
-        query.message.edit_text(
-            text="* MⷨRͬ.JOͦᴋⷦEͤRͬ support chats*"
-            "\nJoin Support Group/Channel",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="𝗟𝗢𝗚'ꜱ 🤡", url="https://t.me/mrjokerloggroup"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="𝗦𝗨𝗣𝗣𝗢𝗥𝗧 👥", url= "https://t.me/LovelySsupport"),
-                 ],
-
-                ]
-            ),
-        )
-
-        
-    elif query.data == "mrjoker_credit":
-        query.message.edit_text(
-            text=f"<b> CREDIT FOR MⷨRͬ.JOͦᴋⷦEͤRͬ DEV'S</b>\n"
-            f"\nHere Some Developers Helping in Making The Mr.Joker Bot",
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="𝗞𝗔𝗩𝗜𝗡𝗗𝗨 𝗔𝗝", url="t.me/kavinduaj"),
-                    InlineKeyboardButton(text="𝗔𝗦𝗛𝗘𝗡 𝗦𝗛𝗔𝗟𝗨𝗞𝗔", url="t.me/ashenwalk"),
-                 
-                 ]
-                ]
-            ),
-        )
-        
-        
 @run_async
-def Source_about_callback(update, context):
+def Source_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text=""" Hi..🤡 I'm *MⷨRͬ.JOͦᴋⷦEͤRͬ*
-                 \nHere is the [🤡Source Code🤡](https://github.com/kmacprt/MR-JOKER-BOT) .""",
+            text=""" Hi..🤗 I'm *lovely*
+                 \nHere is the [Source Code](https://t.me/LOVELYAPPEL) .""",
             parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
+            disable_web_page_preview=False,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="source_back")
+                    InlineKeyboardButton(text="Go Back", callback_data="source_back")
                  ]
                 ]
             ),
@@ -533,7 +449,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="𝗛𝗘𝗟𝗣",
+                                text="Help",
                                 url="t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
@@ -549,16 +465,10 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="𝗛𝗘𝗟𝗣 🙋",
+                            text="Help",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            text="𝗦𝗨𝗣𝗣𝗢𝗥𝗧 𝗖𝗛𝗔𝗧 📢 ",
-                            url="https://t.me/{}".format(SUPPORT_CHAT),
-                        )
-                    ],
+                    ]
                 ]
             ),
         )
@@ -576,7 +486,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="⬅️ 𝗕𝗔𝗖𝗞", callback_data="help_back")]]
+                [[InlineKeyboardButton(text="Back", callback_data="help_back")]]
             ),
         )
 
@@ -649,7 +559,7 @@ def settings_button(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="⬅️ 𝗕𝗔𝗖𝗞",
+                                text="Back",
                                 callback_data="stngs_back({})".format(chat_id),
                             )
                         ]
@@ -725,7 +635,7 @@ def get_settings(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="𝗦𝗘𝗧𝗧𝗜𝗡𝗚𝗦 ⚙️",
+                                text="Settings",
                                 url="t.me/{}?start=stngs_{}".format(
                                     context.bot.username, chat.id
                                 ),
@@ -751,9 +661,9 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 1131653685 and DONATION_LINK:
+        if OWNER_ID != 1677365574 and DONATION_LINK:
             update.effective_message.reply_text(
-                "....LA LA LA"
+                "You can also donate to the person currently running me "
                 "[here]({})".format(DONATION_LINK),
                 parse_mode=ParseMode.MARKDOWN,
             )
@@ -799,7 +709,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@wolfxbotz", "I am Kishore Macha")
+            dispatcher.bot.sendMessage(f"@wolfxbotz", "𝐖𝐨𝐥𝐟𝐗 𝐈𝐬 𝐒𝐭𝐚𝐫𝐭𝐞𝐝 𝐓𝐨 𝐇𝐨𝐰𝐥 [🐺](https://telegra.ph/file/c545bcb7d4ec33814c596.mp4)", parse_mode=ParseMode.MARKDOWN)
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
@@ -816,7 +726,7 @@ def main():
     settings_handler = CommandHandler("settings", get_settings)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
-    about_callback_handler = CallbackQueryHandler(mrjoker_about_callback, pattern=r"mrjoker_")
+    about_callback_handler = CallbackQueryHandler(Masha_about_callback, pattern=r"masha_")
     source_callback_handler = CallbackQueryHandler(Source_about_callback, pattern=r"source_")
 
     donate_handler = CommandHandler("donate", donate)
@@ -845,13 +755,7 @@ def main():
             updater.bot.set_webhook(url=URL + TOKEN)
 
     else:
-        LOGGER.info("""      
-   
-░█▀▄▀█ ░█▀▀█ 　 ───░█ ░█▀▀▀█ ░█─▄▀ ░█▀▀▀ ░█▀▀█ 　 ░█▀▀█ ░█▀▀▀█ ▀▀█▀▀ 　 ░█▀▀▀█ ▀▀█▀▀ ─█▀▀█ ░█▀▀█ ▀▀█▀▀ 
-░█░█░█ ░█▄▄▀ 　 ─▄─░█ ░█──░█ ░█▀▄─ ░█▀▀▀ ░█▄▄▀ 　 ░█▀▀▄ ░█──░█ ─░█── 　 ─▀▀▀▄▄ ─░█── ░█▄▄█ ░█▄▄▀ ─░█── 
-░█──░█ ░█─░█ 　 ░█▄▄█ ░█▄▄▄█ ░█─░█ ░█▄▄▄ ░█─░█ 　 ░█▄▄█ ░█▄▄▄█ ─░█── 　 ░█▄▄▄█ ─░█── ░█─░█ ░█─░█ ─░█──             
-        
-""")
+        LOGGER.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4, clean=True)
 
     if len(argv) not in (1, 3, 4):
@@ -863,7 +767,7 @@ def main():
 
 
 if __name__ == "__main__":
-    LOGGER.info("Successfully loaded MR.JOKER 🤡 modules: " + str(ALL_MODULES))
+    LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
     telethn.start(bot_token=TOKEN)
     pbot.start()
     main()
