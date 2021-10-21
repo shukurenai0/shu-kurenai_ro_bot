@@ -72,13 +72,13 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-MRJOKER_IMG = "https://telegra.ph/file/ed655ae2fdb2570cc029d.jpg"
+MRJOKER_IMG = "https://telegra.ph/file/e3ffbd55b5ccc600f71fa.jpg"
 
 MRJOKER_AUD = "https://audio.jukehost.co.uk/kKJkdHgoMPeqdel4sDrEHr7m4U6o4Xya"
 
 
 PM_START_TEXT = """
-*Hello there*, *I*'*m* [X-Alpha](https://telegra.ph/file/0a8c1b5a089cba0b590a3.jpg)
+*Hello there*, *I*'*m* [𝐖𝐨𝐥𝐟 𝐗](https://telegra.ph/file/e3ffbd55b5ccc600f71fa.jpg)
 *I am an 𝐴𝑛𝑖𝑚𝑒 Themed Group Managing Bot and I will help in managing your group*
 🍃🔻 **Make sure you read** `INFO` **Section Below** 🔺🍃 
 """
