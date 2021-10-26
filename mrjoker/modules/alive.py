@@ -3,7 +3,7 @@ import re, os
 from mrjoker.events import register
 from mrjoker import telethn as tbot
 from mrjoker import telethn as tgbot
-PHOTO = "https://telegra.ph/file/007df1febcb6231298e47.jpg"
+PHOTO = "https://telegra.ph/file/c51b8dafd99ddf0bd30a6.jpg"
 @register(pattern=("/alive"))
 async def awake(event):
   PIKACHU = event.sender.first_name
