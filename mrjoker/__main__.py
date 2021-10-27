@@ -72,13 +72,13 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-MRJOKER_IMG = "https://telegra.ph/file/e3ffbd55b5ccc600f71fa.jpg"
+MRJOKER_IMG = "https://telegra.ph/file/ddb3a6247b9488bdae4b9.jpg"
 
 MRJOKER_AUD = "https://audio.jukehost.co.uk/kKJkdHgoMPeqdel4sDrEHr7m4U6o4Xya"
 
 
 PM_START_TEXT = """
-Hello I'm [𝐰𝐨𝐥𝐟 - 𝐗](https://telegra.ph/file/345cd2da67a5c57189810.jpg) ,
+Hello I'm [𝕾𝖍𝖚 𝖐𝖚𝖗𝖊𝖓𝖆𝖎](https://telegra.ph/file/ddb3a6247b9488bdae4b9.jpg) ,
 ➪ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴀɴᴅ ᴍᴀᴋᴇ ᴀᴅᴍɪɴ ᴛᴏ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴡɪᴛʜ ᴇxᴘʟᴏsɪᴠᴇ.
 ➪ ᴄᴏɴᴛᴀᴄᴛ ᴍʏ [Hᴀᴄᴋᴇʀ] ғᴏʀ ᴀɴʏ ǫᴜᴇʀʏ ᴀɴᴅ [Hᴀᴄᴋᴇʀ](https://t.me/Hollywood_movies_forever) ʜᴇʀᴇ.
 ➪ ᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ʜᴇʟᴘ ᴛᴏ ᴇxᴘʟᴏʀᴇ ᴍᴏʀᴇ ᴀʙᴏᴜᴛ ᴍᴇ ᴀɴᴅ ᴍʏ ғᴇᴀᴛᴜʀᴇs.
@@ -88,19 +88,19 @@ Hello I'm [𝐰𝐨𝐥𝐟 - 𝐗](https://telegra.ph/file/345cd2da67a5c5718981
 buttons = [
     [
         InlineKeyboardButton(
-            text="➕️ Aᴅᴅ ᴡᴏʟғ x ᴛᴏ ɢʀᴏᴜᴘ ➕️", url="t.me/WolfXRobot?startgroup=true"),
+            text="➕️ Aᴅᴅ 𝕾𝖍𝖚 𝖐𝖚𝖗𝖊𝖓𝖆𝖎 ᴛᴏ ɢʀᴏᴜᴘ ➕️", url="t.me/shu_kurenai_ro_bot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="❓𝐇𝐞𝐥𝐩", callback_data="help_back"),
     ],
     [
         InlineKeyboardButton(
-            text="🔥𝐋𝐨𝐠𝐬🔥", url="https://t.me/PigasusLogs"),
+            text="🔥𝐋𝐨𝐠𝐬🔥", url="https://t.me/shukurenai007"),
         InlineKeyboardButton(
-            text="🎉𝐒𝐮𝐩𝐩𝐨𝐫𝐭🎉", url="https://t.me/PigasusSupport"),
+            text="🎉𝐒𝐮𝐩𝐩𝐨𝐫𝐭🎉", url="https://t.me/shukurenairobot007"),
     ],
     [  
-        InlineKeyboardButton(text="👨‍💻𝐎𝐰𝐧𝐞𝐫👨‍💻", url="https://t.me/HMF_OWNER_1"
+        InlineKeyboardButton(text="👨‍💻𝐎𝐰𝐧𝐞𝐫👨‍💻", url="https://t.me/deepakjack007"
     ),
     ], 
     [
@@ -114,10 +114,10 @@ buttons = [
 ]
 
 HELP_STRINGS = """
-*༆WOLF - X comes with many special features in it༆
-꧁CHECK ALL BUTTON BELOW TO EXPLORE EVERY COMMANDS OF WOLF-X꧂
+*༆𝕾𝖍𝖚 𝖐𝖚𝖗𝖊𝖓𝖆𝖎 comes with many special features in it༆
+꧁CHECK ALL BUTTON BELOW TO EXPLORE EVERY COMMANDS OF 𝕾𝖍𝖚 𝖐𝖚𝖗𝖊𝖓𝖆𝖎꧂
 𖣘 All commands can either be used with / or !.
-𖣘 If you facing any issue or find any bugs in any command then you can report it @wolfxbotz /  @Hollywood_movies_forever* [.](https://telegra.ph/file/3c7a768a89335d9af9b5a.jpg)
+𖣘 If you facing any issue or find any bugs in any command then you can report it @shu_Kurenai_ro_bot /  @Hollywood_movies_forever* [.](https://telegra.ph/file/aa423378591c728b1bc6f.jpg)
 """
 
 
